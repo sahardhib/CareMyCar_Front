@@ -95,7 +95,7 @@ export const Logiin = () => {
                         />
                     </div>
                     <div className="forgot-pass">
-                        <a href="/ForgetPassword">mot de passe oubliée?</a>
+                        <a href="/ForgetPassword">nsiti modpassek?</a>
                     </div>
                     {error && <p className="error">{error}</p>} {/* Affichage de l'erreur si elle est définie */}
                     <button
