@@ -197,12 +197,14 @@ function ListeVoiture({ onClose }) {
                     <td>{pdata.date_de_vignette}</td>
                     <td>{pdata.date_d_assurance}</td>
                     <td>
-                      <img
-                        src={`http://127.0.0.1:8000/storage/${pdata.image}`}
-                        alt={pdata.marque}
-                        className="img-thumbnail"
-                        style={{ maxWidth: "50px", maxHeight: "50px" }}
-                      />
+                    <img
+  src={`http://127.0.0.1:8000/storage/${pdata.image}`}
+  alt={pdata.marque}
+  className="img-thumbnail"
+  style={{ maxWidth: "50px", maxHeight: "50px" }}
+/>
+
+
                     </td>
                     <td>
                       <Link to={`/editvoiture/${pdata.id}/edit`} className="text-primary me-2">

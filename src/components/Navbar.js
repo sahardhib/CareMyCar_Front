@@ -44,10 +44,10 @@ function Navbar() {
               <span className="nav-item">contact</span>
             </a>
           </li>
-          {localStorage.getItem("users") ? (
+          {localStorage.getItem("user") ? (
             <>
               <li>
-                <a href="/Account"className="aaa">
+                <a href="/UserInfo"className="aaa">
                   <FontAwesomeIcon icon={faUser}className="fff" />
                   <span className="nav-item">Account</span>
                 </a>

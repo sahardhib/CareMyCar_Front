@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 function Account() {
   const [formData, setFormData] = useState({
@@ -11,19 +12,26 @@ function Account() {
     postal_code: "",
     profile_image: null,
   });
+  const [showAccountInfo, setShowAccountInfo] = useState(false);
 
   useEffect(() => {
-    const userDetail = JSON.parse(localStorage.getItem("users")).userDetail;
-    setFormData({
-      id: userDetail.id,
-      name: userDetail.name || "",
-      mobile: userDetail.mobile || "",
-      email: userDetail.email || "",
-      address: userDetail.address || "",
-      city: userDetail.city || "",
-      postal_code: userDetail.postal_code || "",
-      profile_image: userDetail.profile_image_path || null,
-    });
+    const userData = localStorage.getItem("user");
+    console.log("User data from localStorage:", userData);
+    if (userData) {
+      const userDetail = JSON.parse(userData).userDetail;
+      console.log("User detail:", userDetail);
+      setFormData((prevData) => ({
+        ...prevData,
+        id: userDetail.id || "",
+        name: userDetail.name || "",
+        mobile: userDetail.mobile || "",
+        email: userDetail.email || "",
+        address: userDetail.address || "",
+        city: userDetail.city || "",
+        postal_code: userDetail.postal_code || "",
+        profile_image: userDetail.profile_image_path || null,
+      }));
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -38,7 +46,7 @@ function Account() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formDataToSend = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "profile_image" && value !== null) {
@@ -47,13 +55,13 @@ function Account() {
         formDataToSend.append(key, value);
       }
     });
-
+  
     try {
       const response = await fetch("http://localhost:8000/api/update-user", {
         method: "POST",
         body: formDataToSend,
       });
-
+  
       if (response.ok) {
         const updatedUserData = await response.json();
         // Ajoutez le chemin complet de l'image à l'objet updatedUserData
@@ -61,7 +69,7 @@ function Account() {
           process.env.REACT_APP_API_BASE_URL +
           "/storage/photo/" +
           updatedUserData.userDetail.profile_image;
-
+  
         console.log("Updated User:", updatedUserData);
         alert("User updated successfully!");
       } else if (response.status === 422) {
@@ -79,6 +87,11 @@ function Account() {
       console.error("Error updating user:", error);
       alert("An unexpected error occurred. Please try again later.");
     }
+  };
+  
+
+  const toggleAccountInfo = () => {
+    setShowAccountInfo(!showAccountInfo);
   };
 
   return (
@@ -220,9 +233,14 @@ function Account() {
               </div>
             </fieldset>
 
+            {/* Save Changes Button */}
             <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
+
+            <Link to={`/userInfo?name=${formData.name}&email=${formData.email}&mobile=${formData.mobile}&address=${formData.address}&city=${formData.city}&postal_code=${formData.postal_code}`}className="btn btn-primary">
+    Voir mes informations
+</Link>
           </form>
         </div>
       </div>

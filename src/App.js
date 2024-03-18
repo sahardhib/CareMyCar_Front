@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -16,6 +16,8 @@ import Voiture from "./components/Voiture";
 import ListeVoiture from "./components/ListeVoiture";
 import AjouterVoiture from "./components/AjouterVoiture";
 import Editvoiture from  './components/Editvoiture';
+import Client from "./components/Client";
+import UserInfo from "./components/UserInfo";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
             <Routes>
 
                 <Route path="/" element={<Layout><Home /></Layout>} />
+                <Route path="/UserInfo" element={<AuthGuard><Layout><UserInfo /></Layout></AuthGuard>} />
+                <Route path="/Client" element={<Layout><Client /></Layout>} />
                 <Route path="/about" element={<Layout><About /></Layout>} />
                 <Route path="/contact" element={<Layout><Contact /></Layout>} />
                 <Route path="/Account" element={<AuthGuard><Layout><Account /></Layout></AuthGuard>} />

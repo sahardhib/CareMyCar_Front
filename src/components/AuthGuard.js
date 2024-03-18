@@ -6,7 +6,7 @@ const AuthGuard = ({ children }) => {
 
   useEffect(() => {
     // Check if the user is authenticated
-    const isAuthenticated = localStorage.getItem('users') !== null;
+    const isAuthenticated = localStorage.getItem('user') !== null;
 
     // If not authenticated, redirect to the login page
     if (!isAuthenticated) {

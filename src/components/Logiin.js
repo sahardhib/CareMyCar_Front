@@ -45,7 +45,7 @@ export const Logiin = () => {
     
                 // Redirection basée sur le rôle de l'utilisateur
                 if (response.data.role === "admin") {
-                    navigate("/admin");
+                    navigate("/client");
                 } else if (response.data.role === "technicien") {
                     navigate("/technicien");
                 } else {
@@ -95,7 +95,7 @@ export const Logiin = () => {
                         />
                     </div>
                     <div className="forgot-pass">
-                        <a href="/ForgetPassword">nsiti modpassek?</a>
+                        <a href="/ForgetPassword">mot de passe oubliée?</a>
                     </div>
                     {error && <p className="error">{error}</p>} {/* Affichage de l'erreur si elle est définie */}
                     <button
