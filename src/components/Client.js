@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const Client = () => {
+// Importer votre avatar ou icône par défaut
+  // Remplacez le chemin par le chemin réel de votre image par défaut
+
+  const Client = () => {
     const [users, setUsers] = useState([]);
+    const defaultAvatar = process.env.PUBLIC_URL + '/avatar.png';
 
     useEffect(() => {
         fetchUsers();
@@ -40,53 +44,38 @@ const Client = () => {
     };
 
     return (
-        <div>
+        <div className="client-container">
             <h1>Liste des Clients</h1>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Adresse</th>
-                        <th>Ville</th>
-                        <th>Code postal</th>
-                        <th>Photo</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.mobile}</td>
-                            <td>{user.address}</td>
-                            <td>{user.city}</td>
-                            <td>{user.postal_code}</td>
-                            <td>
-                                {user.profile_image_path && (
-                                    <img
-                                        src={user.profile_image_path}
-                                        alt={user.name}
-                                        style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                <button
-                                    className="btn btn-danger"
-                                    onClick={() => handleDelete(user.id)}
-                                >
-                                    Supprimer
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className="card-container">
+                {users.map(user => (
+                    <div className="card" key={user.id}>
+                        <img
+                            src={user.profile_image_path || defaultAvatar}
+                            alt={user.name}
+                            className="card-image"
+                        />
+                        <div className="card-details">
+                            <h2>{user.name}</h2>
+                            <p>Email: {user.email}</p>
+                            <p>Mobile: {user.mobile}</p>
+                            <p>Adresse: {user.address}</p>
+                            <p>Ville: {user.city}</p>
+                            <p>Code postal: {user.postal_code}</p>
+                            <button
+                                className="btn-delete"
+                                onClick={() => handleDelete(user.id)}
+                            >
+                                Bloquer
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
+
+
+
 
 export default Client;

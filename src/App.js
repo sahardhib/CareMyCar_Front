@@ -25,16 +25,16 @@ function App() {
         <Router>
             <Routes>
 
-                <Route path="/" element={<Layout><Home /></Layout>} />
+                <Route path="/Home" element={<Layout><Home /></Layout>} />
                 <Route path="/UserInfo" element={<AuthGuard><Layout><UserInfo /></Layout></AuthGuard>} />
-                <Route path="/Client" element={<Layout><Client /></Layout>} />
                 <Route path="/about" element={<Layout><About /></Layout>} />
                 <Route path="/contact" element={<Layout><Contact /></Layout>} />
                 <Route path="/Account" element={<AuthGuard><Layout><Account /></Layout></AuthGuard>} />
                 <Route path="/Logout" element={<Layout><Logout /></Layout>} />
                 <Route path="/registre" element={<Registre />} />
                 <Route path="/ForgetPassword" element={<ForgetPassword />} />
-                <Route path="/Logiin" element={<Logiin />} />
+                <Route path="/" element={<Logiin />} />
+                <Route path="/Client" element={<Client />} />
                 <Route path="/Authen" element={<Authen />} />
                 <Route path="/ListeVoiture" element={<AuthGuard><Layout><ListeVoiture /></Layout></AuthGuard>} />
                 <Route path="/AjouterVoiture" element={<AjouterVoiture />} />

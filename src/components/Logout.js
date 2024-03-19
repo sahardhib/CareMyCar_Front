@@ -7,7 +7,7 @@ function Logout() {
     useEffect(() => {
         function logout() {
             localStorage.clear();
-            navigate("/logiin");
+            navigate("/");
         }
 
         logout();

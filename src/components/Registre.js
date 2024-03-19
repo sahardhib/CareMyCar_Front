@@ -50,7 +50,7 @@ const Registre = ({ show, handleClose }) => {
                     response = await response.json();
                     console.warn("response", response);
                     alert("register valide");
-                    navigate("/logiin");
+                    navigate("/");
                 } else {
                     alert("Failed to register. Please try again.");
                 }

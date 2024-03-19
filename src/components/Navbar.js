@@ -22,12 +22,12 @@ function Navbar() {
       <nav className="nav">
         <ul>
           <li>
-            <a href="/" className="logoo" >
+            <a href="/logiin" className="logoo" >
               <img src="/img/download.jpeg" alt="" />
             </a>
           </li>
           <li>
-            <a href="/" className="aaa">
+            <a href="/logiin" className="aaa">
               <FontAwesomeIcon icon={faHouseUser}  className="fff"/>
               <span className="nav-item">home</span>
             </a>
@@ -68,7 +68,7 @@ function Navbar() {
           ) : (
             <>
               <li>
-                <a href="/logiin"className="aaa">
+                <a href="/"className="aaa">
                   <FontAwesomeIcon icon={faRightToBracket} className="fff" />
                   <span className="nav-item">login</span>
                 </a>

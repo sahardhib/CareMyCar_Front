@@ -49,7 +49,7 @@ export const Logiin = () => {
                 } else if (response.data.role === "technicien") {
                     navigate("/technicien");
                 } else {
-                    navigate("/");
+                    navigate("/Home");
                 }
             } else {
                 setError("Email ou mot de passe incorrect.");

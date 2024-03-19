@@ -17,6 +17,8 @@ function ListeVoiture({ onClose }) {
   const [dateDeVignette, setDateDeVignette] = useState("");
   const [dateDAssurance, setDateDAssurance] = useState("");
   const [editVoiture, setEditVoiture] = useState(null);
+  const vignetteOptions = ["Pair", "Impair"];
+
 
   const uploadVoiture = async () => {
     try {
@@ -198,7 +200,7 @@ function ListeVoiture({ onClose }) {
                     <td>{pdata.date_d_assurance}</td>
                     <td>
                     <img
-  src={`http://127.0.0.1:8000/storage/${pdata.image}`}
+ src={`http://127.0.0.1:8000/storage/photos/${pdata.image}`}
   alt={pdata.marque}
   className="img-thumbnail"
   style={{ maxWidth: "50px", maxHeight: "50px" }}
@@ -278,15 +280,15 @@ function ListeVoiture({ onClose }) {
     value={txtvin}
   />
 </Form.Group>
-
 <Form.Group controlId="formDateDeVignette">
-  <Form.Label>Date de Vignette :</Form.Label>
+  <Form.Label>Date de vignette  :</Form.Label>
   <Form.Control
     type="date"
     onChange={(e) => setDateDeVignette(e.target.value)}
     value={dateDeVignette}
   />
 </Form.Group>
+
 
 <Form.Group controlId="formDateDAssurance">
   <Form.Label>Date d'Assurance :</Form.Label>
