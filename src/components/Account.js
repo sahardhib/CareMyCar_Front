@@ -95,7 +95,7 @@ function Account() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 d-flex justify-content-center">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Edit Account Information</h5>

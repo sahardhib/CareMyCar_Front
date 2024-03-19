@@ -1,0 +1,19 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border-color: rgb(30, 209, 233);
+    box-shadow: 0 0 20px rgb(81, 163, 169), inset 0 0 20px rgb(81, 163, 169);
+}
+
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}

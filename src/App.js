@@ -18,6 +18,11 @@ import AjouterVoiture from "./components/AjouterVoiture";
 import Editvoiture from  './components/Editvoiture';
 import Client from "./components/Client";
 import UserInfo from "./components/UserInfo";
+import Service from "./components/Service";
+import Edit from "./components/Edit";
+
+
+
 
 
 function App() {
@@ -28,6 +33,10 @@ function App() {
                 <Route path="/" element={<Layout><Home /></Layout>} />
                 <Route path="/UserInfo" element={<AuthGuard><Layout><UserInfo /></Layout></AuthGuard>} />
                 <Route path="/Client" element={<Layout><Client /></Layout>} />
+                <Route path="/Service" element={<Service />} />
+                <Route path="/edit/:id" element={<Edit />} />
+
+
                 <Route path="/about" element={<Layout><About /></Layout>} />
                 <Route path="/contact" element={<Layout><Contact /></Layout>} />
                 <Route path="/Account" element={<AuthGuard><Layout><Account /></Layout></AuthGuard>} />

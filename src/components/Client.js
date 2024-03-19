@@ -86,6 +86,7 @@ const Client = () => {
                 </tbody>
             </table>
         </div>
+        
     );
 };
 
