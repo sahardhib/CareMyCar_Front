@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouseUser,
@@ -7,9 +7,11 @@ import {
   faMessage,
   faUser,
   faCar,
+  faCalendar,
   faRightFromBracket,
   faRightToBracket,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
+
 
 
 
@@ -56,6 +58,12 @@ function Navbar() {
                 <a href="/ListeVoiture"className="aaa" >
                   <FontAwesomeIcon icon={faCar} className="fff" />
                   <span className="nav-item">Mes Véhicules</span>
+                </a>
+              </li>
+              <li>
+                <a href="/Visits"className="aaa" >
+                  <FontAwesomeIcon icon={faCalendar} className="fff" />
+                  <span className="nav-item">Renez-vous</span>
                 </a>
               </li>
               <li>

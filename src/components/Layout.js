@@ -5,8 +5,17 @@ import Navbar from "./Navbar";
 const Layout = ({ children }) => {
   return (
     <>
-      <Navbar />
-      {children}
+
+        <div className="row">
+            <div className=" col-1">
+                <Navbar />
+            </div>
+            <div className="col ">
+                {children}
+            </div>
+
+        </div>
+
     </>
   );
 };
