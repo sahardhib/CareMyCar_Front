@@ -29,6 +29,17 @@ function Visits() {
     const [selectedVisistMileAge, setselectedVisistMileAge] = useState("");
     const [selectedVisistMatricule, setselectedVisistMatricule] = useState("");
     const [selectedVisistId, setselectedVisistId] = useState("");
+    const [services, setServices] = useState([]);
+    const [selectedServices, setSelectedServices] = useState([]);
+
+    const getServices = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/api/services");
+            setServices(response.data.results);
+        } catch (error) {
+            console.error("Error fetching services:", error);
+        }
+    };
 
 const disableButton=()=>{
     setIsButtonDisabled(!isButtonDisabled)
@@ -129,6 +140,7 @@ const disableButton=()=>{
 
         getVisits();
         getMyCars();
+        getServices(); // Fetch services when component mounts
     }, []);
 
     const handleDateChange = (newDate) => {
@@ -182,6 +194,15 @@ const disableButton=()=>{
         }).replace(/\//g, '-'));
         setdataSelected(true);
         setShowCalendarEdit(false);
+    };
+    const handleCheckboxChange = (serviceId) => {
+        setSelectedServices(prevSelected => {
+            if (prevSelected.includes(serviceId)) {
+                return prevSelected.filter(id => id !== serviceId);
+            } else {
+                return [...prevSelected, serviceId];
+            }
+        });
     };
 
     const handleEditSubmit = async (e) => {
@@ -243,6 +264,7 @@ const disableButton=()=>{
                                 <th className="text-dark">Date</th>
                                 <th className="text-dark">Kilométrage</th>
                                 <th className="text-dark">Matricule</th>
+                                <th className="text-dark">services</th>
                                 <th className="text-dark">Statut</th>
                                 <th className="text-dark">Actions</th>
 
@@ -253,24 +275,28 @@ const disableButton=()=>{
                             <tbody>
 
                             {visits.map((pdata, index) => (
-                                <tr key={index}>
-                                    <td>{pdata.date}</td>
-                                    <td>{pdata.mileage} KM</td>
-                                    <td>{pdata.voiture.matricule} </td>
-                                    <td>{pdata.status==0?"En cours":(pdata.status==1?"Accepté":"Refusé")}</td>
-
-
-                                    <td>
-
-                                        <span className="text-primary me-2" onClick={() => toggleShowEditModal(pdata)}>
-                                            <FontAwesomeIcon icon={faEdit}/>
-                                        </span>
-                                        <span className="text-danger" onClick={() => handleDelete(pdata.id)}>
-                                            <FontAwesomeIcon icon={faTrashAlt}/>
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
+    <tr key={index}>
+        <td>{pdata.date}</td>
+        <td>{pdata.mileage} KM</td>
+        <td>{pdata.voiture.matricule}</td>
+        <td>
+            {/* Display selected services if pdata.services is defined */}
+            {pdata.services && pdata.services.map(serviceId => {
+                const service = services.find(s => s.id === serviceId);
+                return service ? <span key={service.id}>{service.nom}, </span> : null;
+            })}
+        </td>
+        <td>{pdata.status == 0 ? "En cours" : (pdata.status == 1 ? "Accepté" : "Refusé")}</td>
+        <td>
+            <span className="text-primary me-2" onClick={() => toggleShowEditModal(pdata)}>
+                <FontAwesomeIcon icon={faEdit}/>
+            </span>
+            <span className="text-danger" onClick={() => handleDelete(pdata.id)}>
+                <FontAwesomeIcon icon={faTrashAlt}/>
+            </span>
+        </td>
+    </tr>
+))}
                             </tbody>
                         </Table>
                     </div>
@@ -315,6 +341,19 @@ const disableButton=()=>{
                                 value={mileAge}
                             />
                         </Form.Group>
+                        <Form.Group controlId="formServices">
+                        <Form.Label>Services :</Form.Label>
+                        {services.map((service) => (
+                            <Form.Check
+                                key={service.id}
+                                type="checkbox"
+                                id={`service-${service.id}`}
+                                label={service.nom}
+                                checked={selectedServices.includes(service.id)}
+                                onChange={() => handleCheckboxChange(service.id)}
+                            />
+                        ))}
+                    </Form.Group>
                         <Form.Group controlId="formModele">
                             <Form.Label>Matricule :</Form.Label>
                             <select required
