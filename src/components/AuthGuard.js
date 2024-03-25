@@ -10,7 +10,7 @@ const AuthGuard = ({ children }) => {
 
     // If not authenticated, redirect to the login page
     if (!isAuthenticated) {
-      navigate('/');
+      navigate('/Home');
     }
   }, [navigate]);
 
