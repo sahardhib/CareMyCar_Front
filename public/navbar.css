@@ -19,6 +19,9 @@ ul {
 .bodyy {
     background-color: #dfe9f5;
 }
+.blocked-day {
+    background-color: red;
+}
 
 .bodyy .nav {
     position: absolute;

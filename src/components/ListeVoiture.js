@@ -19,6 +19,16 @@ function ListeVoiture({ onClose }) {
   const [editVoiture, setEditVoiture] = useState(null);
   const vignetteOptions = ["Pair", "Impair"];
 
+  const getVoiture = async () => {
+    try {
+      const userId = JSON.parse(localStorage.getItem('user')).userDetail.id;
+      const response = await fetch(`http://127.0.0.1:8000/api/mes_voitures/${userId}`);
+      const data = await response.json();
+      setVoiture(data.voitures);
+    } catch (error) {
+      console.error("Error fetching voiture data:", error);
+    }
+  };
 
   const uploadVoiture = async () => {
     try {
@@ -31,6 +41,7 @@ function ListeVoiture({ onClose }) {
       formData.append("date_de_vignette", dateDeVignette);
       formData.append("date_d_assurance", dateDAssurance);
       formData.append("image", fileimage);
+      formData.append("user_id",  JSON.parse(localStorage.getItem('user')).userDetail.id);
 
       const response = await axios.post(
         "http://localhost:8000/api/voitures",
@@ -40,7 +51,7 @@ function ListeVoiture({ onClose }) {
         }
       );
 
-      setVoiture((prevVoiture) => [...prevVoiture, response.data]);
+      await getVoiture();
 
       onClose();
     } catch (error) {
@@ -139,15 +150,7 @@ function ListeVoiture({ onClose }) {
   };
 
   useEffect(() => {
-    const getVoiture = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:8000/api/voitures");
-        const data = await response.json();
-        setVoiture(data.voitures);
-      } catch (error) {
-        console.error("Error fetching voiture data:", error);
-      }
-    };
+
 
     getVoiture();
   }, []);
@@ -308,7 +311,7 @@ function ListeVoiture({ onClose }) {
 </Form.Group>
 
 <Button variant="success" type="submit">
-  {editVoiture ? "Enregistrer les modifications" : "Enregistrer les informations"}
+  {editVoiture ? "Enregistrer les modifications " : "Enregistrer les informations"}
 </Button>
           </Form>
         </Modal.Body>

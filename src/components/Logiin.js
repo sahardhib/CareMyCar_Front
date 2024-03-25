@@ -39,9 +39,9 @@ export const Logiin = () => {
             });
     
             response = await response.json();
-    
             if (response.status) {
                 localStorage.setItem("user", JSON.stringify(response));
+                console.log()
     
                 // Redirection basée sur le rôle de l'utilisateur
                 if (response.data.role === "admin") {

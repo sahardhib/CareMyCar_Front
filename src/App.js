@@ -8,6 +8,7 @@ import Registre from "./components/Registre";
 import UsersPages from "./components/UsersPages";
 import Logiin from "./components/Logiin";
 import Logout from "./components/Logout";
+import Visits from "./components/Visits";
 import Account from "./components/Account";
 import ForgetPassword from "./components/ForgetPassword";
 import Authen from "./components/Authen";
@@ -45,7 +46,7 @@ function App() {
                 <Route path="/Service" element={<Service />} />
                 <Route path="/Edit" element={<Edit />} />
                 <Route path="/Authen" element={<Authen />} />
-                <Route path="/ListeVoiture" element={<Layout><ListeVoiture /></Layout>} />
+                <Route path="/ListeVoiture" element={<AuthGuard><Layout><ListeVoiture /></Layout></AuthGuard>} />
                 <Route path="/AjouterVoiture" element={<AjouterVoiture />} />
                 <Route path="/editvoiture/:id/edit" element={<Editvoiture />} />
 
